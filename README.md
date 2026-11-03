@@ -43,4 +43,26 @@ hasans-collection/
 Every suit has a photo slot. If a photo is missing, the site shows a drawn suit in that color instead.
 
 1. Open `PHOTO-LIST.txt` to see the file name for each suit, for example `s1.jpg` is Mint Cream and `w1.jpg` is Midnight Navy.
-2. Save your summer photos in `images/summer/` and your winter photos in# CLOTHING-WEB
+2. Save your summer photos in `images/summer/` and your winter photos in
+
+## Checkout, payments and staff orders
+
+**Customer checkout (`checkout.html`)**
+- Asks for full name, phone, email, city, full address, postal code and order notes.
+- Payment methods: **EasyPaisa** (QR code, number, copy button, transaction ID, optional screenshot), **JazzCash** (same flow) and **Cash on delivery** (adds Rs 200 to the total).
+- After the order is placed, the cart is cleared and the customer sees an order number.
+- To use your official QR image instead of the generated one, save it as `images/qr/easypaisa-official.png` and `images/qr/jazzcash-official.png`. The site picks it up automatically.
+
+**Staff orders page**
+- The staff page is a separate website (see the staff zip). It reads the orders that this website saves in Firebase.
+- Both websites must use the same Firebase config.
+- Change the COD fee or the payment numbers in `firebase-config.js`.
+
+### Connect Firebase (free)
+1. Go to console.firebase.google.com and create a project.
+2. Build > Firestore Database > Create database.
+3. Open the **Rules** tab, paste the contents of `firestore.rules` and click Publish.
+4. Project settings > Your apps > add a Web app, then copy the `firebaseConfig` values.
+5. Paste them into `firebase-config.js` and upload the project to GitHub. Use the same values in the staff website.
+
+Until step 5 is done, the site runs in demo mode: orders are saved only in the browser that placed them.
