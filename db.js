@@ -14,7 +14,8 @@ const load = async () => {
 export async function addOrder(o) {
   if (isDemo) { putLocal([{ ...o, id: o.orderNo, createdAt: Date.now() }, ...local()]); return; }
   const { fs, db } = await load();
-  await fs.setDoc(fs.doc(db, "orders", o.orderNo), { ...o, createdAt: fs.serverTimestamp() });
+  const save = fs.setDoc(fs.doc(db, "orders", o.orderNo), { ...o, createdAt: fs.serverTimestamp() });
+  await Promise.race([save, new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 20000))]);
 }
 export async function watchOrders(cb, onError) {
   if (isDemo) { listeners.add(cb); cb(local()); addEventListener("storage", () => cb(local())); return; }
