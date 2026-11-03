@@ -1,12 +1,11 @@
-// Paste your Firebase web app config here (Firebase console > Project settings > Your apps).
-// Until it is filled in, the site runs in demo mode and saves orders on this device only.
+// Firebase web app config for project hasans-collection. Must be identical in the staff website.
 export const firebaseConfig = {
-  apiKey: "PASTE_API_KEY",
-  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_PROJECT_ID.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID"
+  apiKey: "AIzaSyAnprVDlDox1EsIr3P4B3O2-wX1Oso3a0U",
+  authDomain: "hasans-collection.firebaseapp.com",
+  projectId: "hasans-collection",
+  storageBucket: "hasans-collection.firebasestorage.app",
+  messagingSenderId: "1043938729152",
+  appId: "1:1043938729152:web:569f02dbb29d1c6843e125"
 };
 export const COD_FEE = 200;
 export const ACCOUNTS = {
