@@ -27,12 +27,14 @@ document.body.insertAdjacentHTML('afterbegin',`<svg width="0" height="0" style="
 <nav id="menu">${NAV.map(([u,n,k])=>`<a href="${u}"${k&&k===PAGE?' class="on"':''}>${n}</a>`).join('')}</nav>
 <div class="nr"><button class="ib" id="theme" type="button"></button><a class="ib cart-btn" href="cart.html" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1 12H6zM9 8a3 3 0 0 1 6 0"/></svg><b class="cc">0</b></a><button class="ib bgr" id="burger" type="button" aria-label="Open menu">≡</button></div></div></header>`);
 document.body.insertAdjacentHTML('beforeend',`<footer><div class="wrap"><div class="fw"><div><span class="logo">HASAN’s COLLECTION</span><p>Kameez shalwar for summer and winter. Every suit is Rs 3,000.</p></div><div><b>Contact us</b><a href="tel:03009260391">0300 9260391</a><a href="mailto:syedhasanshahqadri@gmail.com">syedhasanshahqadri@gmail.com</a><a href="https://wa.me/${PH}" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div><p class="cp">© 2026 HASAN’s COLLECTION. All rights reserved.</p></div></footer>
-<a class="wa" href="https://wa.me/${PH}?text=${encodeURIComponent('Hello HASAN’s COLLECTION, I have a question.')}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.600-1.700A13 13 0 1 0 16 3zm0 2.400a10.600 10.600 0 1 1-5.500 19.700l-.4-.2-3.800 1 1-3.700-.3-.4A10.600 10.600 0 0 1 16 5.400z"/><path fill="#fff" d="M11.800 9.800c-.3 0-.8.100-1.200.600-.4.500-1.500 1.500-1.500 3.600s1.500 4.200 1.700 4.400c.2.300 3 4.700 7.300 6.400 3.600 1.400 4.300 1.100 5.100 1 .8-.1 2.500-1 2.800-2 .4-1 .4-1.800.3-2-.1-.2-.4-.3-.8-.5l-2.600-1.200c-.4-.1-.6-.2-.9.200l-1.100 1.400c-.2.300-.4.300-.8.100-.4-.2-1.600-.6-3-1.800-1.100-1-1.900-2.200-2.100-2.600-.2-.4 0-.6.200-.8l.6-.7c.2-.2.300-.4.400-.6.100-.3.100-.5 0-.7l-1.200-2.900c-.3-.7-.6-.7-.9-.7z"/></svg></a><div class="toast" id="toast" role="status"></div>`);
+<a class="wa" href="https://wa.me/${PH}?text=${encodeURIComponent('Hello HASAN’s COLLECTION, I have a question.')}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.600-1.700A13 13 0 1 0 16 3zm0 2.400a10.600 10.600 0 1 1-5.500 19.700l-.4-.2-3.800 1 1-3.700-.3-.4A10.600 10.600 0 0 1 16 5.400z"/><path fill="#fff" d="M11.800 9.800c-.3 0-.8.100-1.200.600-.4.500-1.500 1.500-1.500 3.600s1.500 4.200 1.700 4.400c.2.300 3 4.700 7.300 6.400 3.600 1.400 4.300 1.100 5.100 1 .8-.1 2.500-1 2.800-2 .4-1 .4-1.800.3-2-.1-.2-.4-.3-.8-.5l-2.600-1.200c-.4-.1-.6-.2-.9.200l-1.100 1.400c-.2.300-.4.300-.8.100-.4-.2-1.600-.6-3-1.800-1.100-1-1.900-2.200-2.100-2.600-.2-.4 0-.6.200-.8l.6-.7c.2-.2.300-.4.400-.6.100-.3.100-.5 0-.7l-1.200-2.900c-.3-.7-.6-.7-.9-.7z"/></svg></a><button class="top" id="top" type="button" aria-label="Back to top">↑</button><div class="toast" id="toast" role="status"></div>`);
+document.body.insertAdjacentHTML('afterbegin','<div class="bar" id="bar"></div>');
 
 /* ---------- Theme ---------- */
 const R=document.documentElement;
 const isDark=()=>(R.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))==='dark';
-const paint=()=>{const d=isDark();$('#theme').textContent=d?'☀':'☾';$('#theme').setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')};
+const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>';
+const paint=()=>{const d=isDark();$('#theme').innerHTML=d?SUN:MOON;$('#theme').setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme')};
 try{const t=localStorage.getItem('hc-theme');if(t)R.dataset.theme=t}catch(e){}
 paint();
 $('#theme').onclick=()=>{const t=isDark()?'light':'dark';R.dataset.theme=t;try{localStorage.setItem('hc-theme',t)}catch(e){}paint()};
@@ -54,14 +56,14 @@ document.addEventListener('click',e=>{
   if(b){add(b.dataset.buy);location.href='cart.html'}
 });
 
-/* ---------- 3D tilt ---------- */
+/* ---------- 3D tilt + card glow ---------- */
 const tilt=root=>$$('.tilt',root).forEach(el=>{
-  el.onpointermove=e=>{if(e.pointerType!=='mouse')return;const r=el.getBoundingClientRect();el.style.setProperty('--ry',((e.clientX-r.left)/r.width-.5)*14+'deg');el.style.setProperty('--rx',(.5-(e.clientY-r.top)/r.height)*12+'deg')};
+  el.onpointermove=e=>{if(e.pointerType!=='mouse')return;const r=el.getBoundingClientRect();el.style.setProperty('--gx',(e.clientX-r.left)+'px');el.style.setProperty('--gy',(e.clientY-r.top)+'px');el.style.setProperty('--ry',((e.clientX-r.left)/r.width-.5)*14+'deg');el.style.setProperty('--rx',(.5-(e.clientY-r.top)/r.height)*12+'deg')};
   el.onpointerleave=()=>{el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')};
 });
 
 /* ---------- Cards ---------- */
-const card=p=>`<article class="card tilt" style="--c:${p.hex}" data-n="${p.color.toLowerCase()}"><div class="im">${art(p)}</div><div class="tx"><h3>${p.name}</h3><p class="cn"><i></i>${p.color} · ${p.fabric}</p><div class="pr">${fmt(PRICE)}</div><div class="bt"><button class="btn line" type="button" data-add="${p.id}">Add to cart</button><button class="btn" type="button" data-buy="${p.id}">Buy now</button></div></div></article>`;
+const card=p=>`<article class="card tilt rv" style="--c:${p.hex}" data-n="${p.color.toLowerCase()}"><div class="im">${art(p)}</div><div class="tx"><h3>${p.name}</h3><p class="cn"><i></i>${p.color} · ${p.fabric}</p><div class="pr">${fmt(PRICE)}</div><div class="bt"><button class="btn line" type="button" data-add="${p.id}">Add to cart</button><button class="btn" type="button" data-buy="${p.id}">Buy now</button></div></div></article>`;
 
 /* ---------- Pages ---------- */
 if(PAGE==='home'){
@@ -97,3 +99,34 @@ if(PAGE==='cart'){
   render();
 }
 tilt(document);
+
+/* ---------- Effects: reveal, progress bar, back to top, ripple, hero glow, counters ---------- */
+$$('.sh,.wy,.tile,.cl2,.ct>div:first-child,.tools').forEach(e=>e.classList.add('rv'));
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting)return;io.unobserve(en.target);
+  const sib=[...en.target.parentElement.children].indexOf(en.target)%6;
+  setTimeout(()=>en.target.classList.add('in'),sib*70);
+}),{threshold:.12,rootMargin:'0px 0px -40px 0px'}):null;
+$$('.rv').forEach(e=>io?io.observe(e):e.classList.add('in'));
+
+const bar=$('#bar'),toTop=$('#top');
+const onScroll=()=>{const h=document.documentElement,m=h.scrollHeight-h.clientHeight;bar.style.transform=`scaleX(${m>0?scrollY/m:0})`;toTop.classList.toggle('on',scrollY>600)};
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+toTop.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+document.addEventListener('pointerdown',e=>{
+  const b=e.target.closest('.btn');if(!b)return;
+  const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),s=document.createElement('span');
+  s.className='rip';Object.assign(s.style,{width:d+'px',height:d+'px',left:e.clientX-r.left-d/2+'px',top:e.clientY-r.top-d/2+'px'});
+  b.append(s);setTimeout(()=>s.remove(),650);
+});
+
+const hero=$('.hero');
+if(hero)hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--mx',e.clientX-r.left+'px');hero.style.setProperty('--my',e.clientY-r.top+'px')});
+
+$$('[data-count]').forEach(el=>{
+  const end=+el.dataset.count,pre=el.dataset.pre||'';
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!io){el.textContent=pre+end.toLocaleString('en-US');return}
+  new IntersectionObserver((es,o)=>{if(!es[0].isIntersecting)return;o.disconnect();const t0=performance.now();
+    const step=t=>{const k=Math.min(1,(t-t0)/1200),v=Math.round(end*(1-Math.pow(1-k,3)));el.textContent=pre+v.toLocaleString('en-US');if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}).observe(el);
+});
